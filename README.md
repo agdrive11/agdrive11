@@ -13,7 +13,7 @@ This is a Telegram Bot written in Python for mirroring files on the Internet to 
 - View Link button, extra button to open file index link in broswer instead of direct download
 - Status Pages for unlimited tasks
 - Clone status
-- Search in multiple Drive folder/TeamDrive
+- Search in multiple Drive folder/TeamDrive (Recursive Search)
 - Recursive Search (only with `root` or TeamDrive ID, folder ids will be listed with non-recursive method)
 - Multi-Search by token.pickle if exists
 - Extract rar, zip and 7z splits with or without password
@@ -28,6 +28,7 @@ This is a Telegram Bot written in Python for mirroring files on the Internet to 
 - Qbittorrent seed until reaching specific ratio or time
 - Rss feed and filter. Based on this repository [rss-chan](https://github.com/hyPnOtICDo0g/rss-chan)
 - Save leech settings including thumbnails in database
+- Mirror/Leech multi links/torrent-files with one command. **Note**: This feature will not work for clone, count, tg-files or watch commands
 - Many bugs have been fixed
 
 ## From Other Repositories
@@ -52,7 +53,7 @@ This is a Telegram Bot written in Python for mirroring files on the Internet to 
   > ZIP, RAR, TAR, 7z, ISO, WIM, CAB, GZIP, BZIP2, APM, ARJ, CHM, CPIO, CramFS, DEB, DMG, FAT, HFS, LZH, LZMA, LZMA2, MBR, MSI, MSLZ, NSIS, NTFS, RPM, SquashFS, UDF, VHD, XAR, Z, tar.xz
 
 - Direct links Supported:
-  >letsupload.io, hxfile.co, anonfiles.com, bayfiles.com, antfiles, fembed.com, fembed.net, femax20.com, layarkacaxxi.icu, fcdn.stream, sbplay.org, naniplay.com, naniplay.nanime.in, naniplay.nanime.biz, sbembed.com, streamtape.com, streamsb.net, feurl.com, pixeldrain.com, racaty.net, 1fichier.com, 1drv.ms (Only works for file not folder or business account), uptobox.com (Uptobox account must be premium), solidfiles.com
+  >letsupload.io, hxfile.co, anonfiles.com, bayfiles.com, antfiles, fembed.com, fembed.net, femax20.com, layarkacaxxi.icu, fcdn.stream, sbplay.org, naniplay.com, naniplay.nanime.in, naniplay.nanime.biz, sbembed.com, streamtape.com, streamsb.net, feurl.com, pixeldrain.com, racaty.net, 1fichier.com, 1drv.ms (Only works for file not folder or business account), uptobox.com (Uptobox account must be premium) and solidfiles.com
 
 # How to deploy?
 
@@ -337,6 +338,7 @@ help - All cmds with description
 - `UPSTREAM_REPO` variable can be used for edit/add/update any file in repository.
 - You can add private/public repository link to grab all files from it.
 - You can skip adding the privates files like token.pickle or accounts folder before deploying, also no need to add variables direct links except config.env, simply fill `UPSTREAM_REPO` private one in case you want to grab all files including private files.
+- If you added private files while deploying and you have added private `UPSTREAM_REPO` and your private files in this private repository, so your private files will be overwritten from this repository. Also if you are using URL variables like `TOKEN_PICKLE_URL` then all files from those variables will override the private files that added before deploying or from private `UPSTREAM_REPO`.
 - `UPSTREAM_BRANCH` don't ever fill heroku here.
 
 ------
@@ -352,7 +354,7 @@ Let us create only the Service Accounts that we need.
 
 >**NOTE**: If you have created SAs in past from this script, you can also just re download the keys by running:
 ```
-python3 gen_sa_accounts.py --download-keys project_id
+python3 gen_sa_accounts.py --download-keys $PROJECTID
 ```
 >**NOTE:** 1 Service Account can upload/copy around 750 GB a day, 1 project can make 100 Service Accounts so you can upload 75 TB a day or clone 2 TB from each file creator (uploader email).
 
