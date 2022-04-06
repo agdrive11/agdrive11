@@ -21,7 +21,8 @@ from .modules import authorize, list, cancel_mirror, mirror_status, mirror, clon
 
 
 def stats(update, context):
-    botVersion = check_output(["git log -1 --date=format:v%Y.%m.%d --pretty=format:%cd"], shell=True).decode()
+    rlast_commit = check_output(["git log -1 --date=relative --pretty=format:%cd"], shell=True).decode()
+    slast_commit = check_output(["git log -1 --date=short --pretty=format:%cd"], shell=True).decode()
     currentTime = get_readable_time(time() - botStartTime)
     osUptime = get_readable_time(time() - boot_time())
     total, used, free, disk= disk_usage('/')
