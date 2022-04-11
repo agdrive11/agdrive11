@@ -178,7 +178,7 @@ class MirrorListener:
             except Exception as e:
                 LOGGER.error(str(e))
             count = len(download_dict)
-        msg = f"{self.tag} your download has been stopped due to: {error} \n\nPossible Reasons:👇\nYour link is not a Direct link or Supported Link.\nOr It's Already in the GDrive"
+        msg = f"{self.tag} your download has been stopped due to: {error} \n\nPossible Reasons:👇\nYour link is not a Direct link or Supported Link.\nIt's Already in the GDrive.\nYou stopped it."
         sendMessage(msg, self.bot, self.message)
         if count == 0:
             self.clean()
@@ -357,6 +357,7 @@ def _mirror(bot, message, isZip=False, extract=False, isQbit=False, isLeech=Fals
                     sleep(3)
                     nextmsg = type('nextmsg', (object, ), {'chat_id': message.chat_id, 'message_id': message.reply_to_message.message_id + 1})
                     nextmsg = sendMessage(message_args[0], bot, nextmsg)
+                    nextmsg.from_user.id = message.from_user.id
                     multi -= 1
                     sleep(3)
                     Thread(target=_mirror, args=(bot, nextmsg, isZip, extract, isQbit, isLeech, pswd, multi)).start()
@@ -452,6 +453,7 @@ def _mirror(bot, message, isZip=False, extract=False, isQbit=False, isLeech=Fals
         sleep(3)
         nextmsg = type('nextmsg', (object, ), {'chat_id': message.chat_id, 'message_id': message.reply_to_message.message_id + 1})
         nextmsg = sendMessage(message_args[0], bot, nextmsg)
+        nextmsg.from_user.id = message.from_user.id
         multi -= 1
         sleep(3)
         Thread(target=_mirror, args=(bot, nextmsg, isZip, extract, isQbit, isLeech, pswd, multi)).start()
