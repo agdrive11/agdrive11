@@ -39,7 +39,7 @@ def _clone(message, bot, multi=0):
     is_gdtot = is_gdtot_link(link)
     if is_gdtot:
         try:
-            msg = sendMessage(f"⏳Processing your Link \n\n<code>{link}</code>", context.bot, update.message)
+            msg = sendMessage(f"⏳Processing your Link \n\n<code>{link}</code>", bot, message)
             link = gdtot(link)
             deleteMessage(bot, msg)
         except DirectDownloadLinkException as e:
