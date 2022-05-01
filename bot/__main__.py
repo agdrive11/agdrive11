@@ -5,7 +5,7 @@ from psutil import disk_usage, cpu_percent, swap_memory, cpu_count, virtual_memo
 from time import time
 from pyrogram import idle
 from sys import executable
-from telegram import ParseMode, InlineKeyboardMarkup
+from telegram import InlineKeyboardMarkup
 from telegram.ext import CommandHandler
 
 from bot import bot, app, dispatcher, updater, botStartTime, IGNORE_PENDING_REQUESTS, alive, OWNER_ID, LOGGER, Interval, rss_session, INCOMPLETE_TASK_NOTIFIER, DB_URI
@@ -281,10 +281,6 @@ def main():
             chat_id, msg_id = map(int, f)
         bot.edit_message_text("Restarted successfully!", chat_id, msg_id)
         osremove(".restartmsg")
-    elif OWNER_ID:
-        try:
-            text = "<b>Bot Restarted!</b>"
-            message = bot.sendMessage(chat_id=OWNER_ID, text=text, parse_mode=ParseMode.HTML)
 
     start_handler = CommandHandler(BotCommands.StartCommand, start, run_async=True)
     ping_handler = CommandHandler(BotCommands.PingCommand, ping,
