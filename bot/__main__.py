@@ -5,8 +5,8 @@ from psutil import disk_usage, cpu_percent, swap_memory, cpu_count, virtual_memo
 from time import time
 from pyrogram import idle
 from sys import executable
-from telegram import InlineKeyboardMarkup
-from telegram.ext import ParseMode, CommandHandler
+from telegram import ParseMode, InlineKeyboardMarkup
+from telegram.ext import CommandHandler
 
 from bot import bot, app, dispatcher, updater, botStartTime, IGNORE_PENDING_REQUESTS, alive, OWNER_ID, LOGGER, Interval, rss_session, INCOMPLETE_TASK_NOTIFIER, DB_URI
 from .helper.ext_utils.fs_utils import start_cleanup, clean_all, exit_clean_up
