@@ -6,9 +6,9 @@ from time import time
 from pyrogram import idle
 from sys import executable
 from telegram import InlineKeyboardMarkup
-from telegram.ext import CommandHandler
+from telegram.ext import ParseMode, CommandHandler
 
-from bot import bot, app, dispatcher, updater, botStartTime, IGNORE_PENDING_REQUESTS, alive, LOGGER, Interval, rss_session, INCOMPLETE_TASK_NOTIFIER, DB_URI
+from bot import bot, app, dispatcher, updater, botStartTime, IGNORE_PENDING_REQUESTS, alive, OWNER_ID, LOGGER, Interval, rss_session, INCOMPLETE_TASK_NOTIFIER, DB_URI
 from .helper.ext_utils.fs_utils import start_cleanup, clean_all, exit_clean_up
 from .helper.ext_utils.telegraph_helper import telegraph
 from .helper.ext_utils.bot_utils import get_readable_file_size, get_readable_time
@@ -281,6 +281,10 @@ def main():
             chat_id, msg_id = map(int, f)
         bot.edit_message_text("Restarted successfully!", chat_id, msg_id)
         osremove(".restartmsg")
+    elif OWNER_ID:
+        try:
+            text = "<b>Bot Restarted!</b>"
+            message = bot.sendMessage(chat_id=OWNER_ID, text=text, parse_mode=ParseMode.HTML)
 
     start_handler = CommandHandler(BotCommands.StartCommand, start, run_async=True)
     ping_handler = CommandHandler(BotCommands.PingCommand, ping,
