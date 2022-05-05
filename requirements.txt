@@ -24,6 +24,7 @@ python-telegram-bot
 qbittorrent-api
 requests
 six
+speedtest-cli
 telegraph
 tenacity
 tgCrypto
